@@ -31,19 +31,45 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
-    data() {
-        return {
-            categoryName: "",
-            description: "",
-            imageUrl: "",
-        }
+  data() {
+    return {
+      categoryName: "",
+      description: "",
+      imageUrl: "",
+      joke: "",
+    };
+  },
+  methods: {
+    async addCategory() {
+      const newCategory = {
+        categoryName: this.categoryName,
+        description: this.description,
+        imageUrl: this.imageURL,
+      };
+      const baseURL = "https://634f7b84df22c2af7b52462f.mockapi.io/";
+      await axios({
+        method: "post",
+        url: baseURL + "category",
+        data: JSON.stringify(newCategory),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(() => {
+          this.$swal({
+            text: "Category Added Successfully",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
+          console.log("Runm ok ");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    methods: {
-        addCategory() {
-            
-        }
-    }
+  },
 };
 </script>
 <style lang=""></style>

@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../views/AboutView.vue')
   },
   {
+    path: '/admin/category',
+    name: 'Category',
+    component: () => import('../views/Category/Category.vue')
+  },
+  {
     path: '/admin/Category/add',
     name: 'AddCategory',
     component: () => import('../views/Category/AddCategory.vue')
