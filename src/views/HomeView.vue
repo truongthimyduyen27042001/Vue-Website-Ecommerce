@@ -28,6 +28,7 @@
           v-for="category of categories"
           :key="category.id"
           class="col-xl-4 col-md-6 col-12 d-flex p-3"
+          @click="$router.push('/products/' + category.id)"
         >
           <CategoryBox :category="category" />
         </div>

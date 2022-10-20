@@ -1,16 +1,33 @@
+<!-- eslint-disable vue/no-unused-components -->
 <template>
   <div id="app">
-    <div id="navbar">
-      <Navbar />
-    </div>
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <component :is="layout">
+        <transition name="slide-fade" mode="out-in">
+          <router-view />
+        </transition>
+      </component>
+    </transition>
   </div>
 </template>
 <script>
-import Navbar from "./components/Navbar.vue";
+import defaultLayout from "./layout/Default.vue";
+import unauthLayout from "./layout/UnAuth.vue";
+import secretLayout from "./layout/Secret.vue";
 export default {
   name: "App",
-  components: { Navbar },
+  components: {
+    defaultLayout,
+    unauthLayout,
+    secretLayout,
+  },
+  computed: {
+    layout() {
+      if (this.$route.meta.layout === "unauth") return "unauthLayout";
+      else if (this.$route.meta.layout === "secret") return "secretLayout";
+      else return "defaultLayout";
+    },
+  },
 };
 </script>
 <style>
@@ -44,6 +61,6 @@ a {
   text-decoration: none;
 }
 a:hover {
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
 </style>
