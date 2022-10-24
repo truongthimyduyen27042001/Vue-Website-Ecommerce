@@ -31,8 +31,6 @@ export default {
         .get(this.baseURL + "products")
         .then((res) => {
           this.categories = res.data;
-          console.log("@@@@");
-          console.log(this.categories);
         })
         .catch((err) => console.log(err));
     },

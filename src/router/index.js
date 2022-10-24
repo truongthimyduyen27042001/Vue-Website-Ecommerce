@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import HomeView from '../views/HomePage/HomeView.vue'
+import Login from '../views/Auth/Login.vue'
+import Register from '../views/Auth/Register.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
     meta: { layout: "unauth" },
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: Register,
     meta: { layout: "unauth" },
   },
@@ -25,6 +25,12 @@ const routes = [
     component: HomeView,
   },
   {
+    path: '/products',
+    name: 'listproducts',
+    component: () => import('../views/Product/ListProducts.vue'),
+
+  },
+  {
     path: '/products/:id',
     name: 'detail',
     component: () => import('../views/Product/DetailProduct.vue'),
@@ -32,7 +38,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import('../views/AboutView.vue')
+    component: () => import('../views/About/AboutView.vue')
   },
   {
     path: '/admin/category',
@@ -40,14 +46,14 @@ const routes = [
     component: () => import('../views/Category/Category.vue')
   },
   {
-    path: '/admin/Category/add',
+    path: '/admin/category/add',
     name: 'AddCategory',
     component: () => import('../views/Category/AddCategory.vue')
   },
   {
     path: "/dashboard",
     name: 'Dashboard',
-    component: () => import("../views/Dashboard.vue"),
+    component: () => import("../views/Dashboard/Dashboard.vue"),
     meta: { layout: "secret" },
   }
 ]

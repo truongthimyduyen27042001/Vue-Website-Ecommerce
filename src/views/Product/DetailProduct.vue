@@ -5,17 +5,17 @@
       <div class="col-md-4 col-12">
         <div class="product-image img-fluid">
           <img
-            src="http://btsneaker.vn/wp-content/uploads/2021/11/dia-chi-ban-giay-sneaker-tai-ha-noi-1.jpg"
-            alt=""
+            :src="product.image"
+            alt="hinh anh"
           />
         </div>
       </div>
       <div class="col-md-6 col-12 pt-3">
         <div class="product-info">
-          <h3 class="product-name">giày air force 1</h3>
+          <h3 class="product-name">{{product.title}}</h3>
           <h6 class="category font-italic">Smart device</h6>
-          <h6 class="font-weight-bold">$ 2</h6>
-          <p>Bhai pote</p>
+          <h6 class="font-weight-bold">$ {{product.price}}</h6>
+          <p>{{product.category}}</p>
           <div class="product-quantity">
             <button class="btn btn-card btn-minus">
               <font-awesome-icon icon="fa-solid fa-minus" /></button
@@ -61,7 +61,28 @@
   </div>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+  created() {
+  },
+  data() {
+    return {
+      product: null,
+      baseURL: "https://fakestoreapi.com/",
+    };
+  },
+  methods: {
+    async getProduct() {
+      await axios
+        .get(`${this.baseURL}products/${this.$route.params.id}`)
+        .then((res) => (this.product = res.data))
+        .catch((err) => console.log(err));
+    },
+  },
+  mounted() {
+    this.getProduct();
+  },
+};
 </script>
 <style lang="scss">
 .product-image {

@@ -63,7 +63,6 @@ export default {
             icon: "success",
             closeOnClickOutside: false,
           });
-          console.log("Runm ok ");
         })
         .catch((err) => {
           console.log(err);

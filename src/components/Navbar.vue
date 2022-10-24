@@ -1,7 +1,7 @@
-<template lang="">
+<template>
   <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }">
-      <img id="logo" src="../assets/icon.png" />
+    <router-link class="navbar-brand" :to="{ name: 'home' }">
+      <img src="../assets/icon.png" alt="" id="logo" />
     </router-link>
     <!--    Burger Button-->
     <button
@@ -44,80 +44,6 @@
       </form>
       {{/*  dropdowns  */}}
       <ul class="navbar-nav ml-auto">
-        <!--      Admin drop down-->
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link text-light dropdown-toggle"
-            href="#"
-            id="navbarDropdownAdmin"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Admin
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
-            <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }"
-              >Category</router-link
-            >
-            <router-link class="dropdown-item" :to="{ name: 'AdminProduct' }"
-              >Products</router-link
-            >
-          </div>
-        </li>
-
-        <!--      Account drop down-->
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link text-light dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Accounts
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link
-              class="dropdown-item"
-              v-if="!token"
-              :to="{ name: 'Signin' }"
-              >WishList</router-link
-            >
-            <router-link class="dropdown-item" v-else :to="{ name: 'WishList' }"
-              >WishList</router-link
-            >
-            <router-link
-              class="dropdown-item"
-              v-if="!token"
-              :to="{ name: 'Signin' }"
-              >Log In</router-link
-            >
-            <router-link
-              class="dropdown-item"
-              v-if="!token"
-              :to="{ name: 'Signup' }"
-              >Sign Up</router-link
-            >
-            <a class="dropdown-item" v-if="token" href="#" @click="signout"
-              >Sign Out</a
-            >
-          </div>
-        </li>
-        {{/*  orders  */}}
-        <li class="nav-item" data-v-47c8c227="">
-          <a
-            href="/order"
-            class="router-link-active router-link-exact-active nav-link text-light"
-            data-v-47c8c227=""
-            aria-current="page"
-            >Orders</a
-          >
-        </li>
-        {{/*  shopping carts  */}}
         <li class="nav-item" data-v-47c8c227="">
           <div id="cart" data-v-47c8c227="">
             <span id="nav-cart-count" data-v-47c8c227="">0</span
@@ -130,6 +56,60 @@
             ></a>
           </div>
         </li>
+        <!--      UserLogin drop down-->
+        <li
+          class="nav-item dropdown d-flex nav-justified bi-align-center"
+          style="border-radius: 50%"
+          v-if="isLogin"
+        >
+          <img
+            src="https://scontent-sin6-4.xx.fbcdn.net/v/t39.30808-6/312817449_1475050596241563_4059668835435322742_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=Pl-6vtdvPt4AX_yx8FX&_nc_ht=scontent-sin6-4.xx&oh=00_AT_yyxQp2lWwl7gcWwxpkgTQasVY3B3Dp0NZo3WF_hOlRw&oe=635B3E4D"
+            alt=""
+            class="user-image"
+          />
+          <a
+            class="nav-link text-light dropdown-toggle"
+            href="#"
+            id="navbarDropdownAdmin"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <!-- {{ currentUser.name }} -->
+            sdsdsd
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+            <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }"
+              >Category</router-link
+            >
+            <router-link class="dropdown-item" :to="{ name: 'AdminProduct' }"
+              >Products</router-link
+            >
+            <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }"
+              >Log out</router-link
+            >
+          </div>
+        </li>
+        <!-- user is not login -->
+        <div class="d-flex user-no-auth" v-else>
+          <li class="nav-item" role="button">
+            <router-link
+              class="nav-link text-light"
+              href="#"
+              :to="{ name: 'login' }"
+              >Login</router-link
+            >
+          </li>
+          <li class="nav-item" role="button">
+            <router-link
+              class="nav-link text-light"
+              href="#"
+              :to="{ name: 'register' }"
+              >Register</router-link
+            >
+          </li>
+        </div>
       </ul>
     </div>
   </div>
@@ -137,11 +117,31 @@
 <script>
 export default {
   name: "Navbar",
+  async created() {
+    this.currentUser = await JSON.parse(localStorage.getItem("currentUser"));
+    if (this.currentUser !== null) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
+  },
   data() {
     return {
       token: false,
+      currentUser: null,
+      isLogin: false,
     };
   },
 };
 </script>
-<style lang=""></style>
+<style lang="scss">
+.nav-item {
+  margin: 0 10px;
+}
+.user-image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+</style>

@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 text-center pt-3">
         <router-link :to="{ name: 'Home' }">
-          <img id="logo" src="../assets/icon.png" />
+          <img id="logo" src="../../assets/icon.png" />
         </router-link>
       </div>
     </div>
@@ -13,15 +13,10 @@
       <div class="col-12 justify-content-center d-flex flex-row pt-5">
         <div id="register-div">
           <h1 class="pt-4 pl-4 text-left">Create Account</h1>
-          <form @submit="signin" class="pt-4 pl-4 pr-4">
+          <form class="pt-4 pl-4 pr-4">
             <div class="form-group text-left">
               <label>Email</label>
-              <input
-                type="email"
-                class="form-control"
-                v-model="email"
-                required
-              />
+              <input type="email" class="form-control" required />
             </div>
             <div class="row">
               <div class="col-6">
@@ -39,30 +34,16 @@
             </div>
             <div class="form-group text-left">
               <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                v-model="password"
-                required
-              />
+              <input type="password" class="form-control" required />
             </div>
             <div class="form-group text-left">
               <label>Confirm Password</label>
-              <input
-                type="password"
-                class="form-control"
-                v-model="password"
-                required
-              />
+              <input type="password" class="form-control" required />
             </div>
             <button type="submit" class="btn btn-primary mt-2 py-0">
               Create Account
               <!--  loading bar will appear when we are making the API call and saveing the token -->
-              <div
-                v-if="loading"
-                class="spinner-border spinner-border-sm"
-                role="status"
-              >
+              <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
             </button>
@@ -84,11 +65,15 @@
   </div>
 </template>
 <script>
-export default {
-  name: "SignIn",
-};
+export default {};
 </script>
 <style>
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 #register-div {
   border: 1px solid #dee2e6 !important;
 }
