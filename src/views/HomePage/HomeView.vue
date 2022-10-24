@@ -1,6 +1,6 @@
 <template lang="">
   <div class="home-page">
-    <div id="background-div" class="page-holder bg-cover">
+    <div id="background-div" class="page-half-holder bg-cover">
       <div class="container py-5">
         <header class="text-left text-white py-5">
           <h3 class="mb-4 rounded">
@@ -45,6 +45,9 @@ export default {
 }
 .page-holder {
   min-height: 100vh;
+}
+.page-half-holder {
+  min-height: 50vh;
 }
 #heading {
   opacity: 0.8;

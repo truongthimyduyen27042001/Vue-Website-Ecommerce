@@ -76,8 +76,7 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <!-- {{ currentUser.name }} -->
-            sdsdsd
+            {{ currentUser.name }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
             <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }"
@@ -86,7 +85,10 @@
             <router-link class="dropdown-item" :to="{ name: 'AdminProduct' }"
               >Products</router-link
             >
-            <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }"
+            <router-link
+              class="dropdown-item"
+              :to="{ name: 'home' }"
+              @lick="logout()"
               >Log out</router-link
             >
           </div>
@@ -132,9 +134,33 @@ export default {
       isLogin: false,
     };
   },
+  methods: {
+    logout() {},
+  },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  #cart {
+    position: relative;
+    #nav-cart-count {
+      position: absolute;
+      background-color: red;
+      height: fit-content;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      top: -40%;
+      right: -40%;
+      color: white;
+    }
+  }
+}
 .nav-item {
   margin: 0 10px;
 }

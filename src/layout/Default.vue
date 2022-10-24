@@ -1,7 +1,9 @@
 <template>
   <div class="default-inner">
     <Navbar />
-    <slot />
+    <div style="margin-top: 8vh">
+      <slot></slot>
+    </div>
     <Footer />
   </div>
 </template>
@@ -16,4 +18,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+</style>
