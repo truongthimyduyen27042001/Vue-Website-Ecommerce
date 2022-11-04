@@ -3,15 +3,15 @@
     <div class="embed-responsive embed-responsive-16by9">
       <img
         class="card-img-top embed-responsive-item"
-        :src="category.image"
-        alt="Category Image"
+        :src="product.images[0]"
+        alt="product Image"
       />
     </div>
 
     <div class="card-body">
-      <h5 class="card-title">{{ category.category }}</h5>
+      <h5 class="card-title">{{ product.product }}</h5>
       <p class="card-text font-italic">
-        {{ category.description.substring(0, 65) }}...
+        {{ product.description.substring(0, 65) }}...
       </p>
       <div class="btn-control-card d-flex justify-content-end">
         <button id="show-cart-button" type="button" class="btn mr-3 p-1 py-0">
@@ -43,8 +43,8 @@
 
 <script>
 export default {
-  name: "CategoryBox",
-  props: ["category"],
+  name: "ProductBox",
+  props: ["product"],
   methods: {},
 };
 </script>
@@ -56,6 +56,9 @@ export default {
   cursor: pointer;
   img {
     object-fit: contain;
+  }
+  svg {
+    width: 20px !important;
   }
 }
 a {
@@ -75,7 +78,7 @@ a {
 .card-text {
   font-size: 0.9rem;
 }
-#edit-category {
+#edit-product {
   float: right;
 }
 </style>

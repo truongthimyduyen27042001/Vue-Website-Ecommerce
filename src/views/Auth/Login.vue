@@ -32,16 +32,12 @@
                 required
               />
             </div>
-            <p
-              v-show="errorLogin"
-              class="msg-error text-left"
-              style="color: red"
-            >
-              *Login fail
-            </p>
             <small class="form-text text-muted"
               >By continuing, you agree to Simplecoding's Conditions of Use and
               Privacy Notice.</small
+            >
+            <small class="form-text text-error text-left" v-show="isLoginFalse"
+              >*Login failed</small
             >
             <button
               class="btn btn-primary mt-2 py-0"
@@ -88,38 +84,38 @@ export default {
       loading: false,
       users: [],
       currentUser: null,
-      errorLogin: false,
-      email: "",
-      password: "",
+      isLoginFalse: null,
+      email: null,
+      password: null
     };
   },
   methods: {
     async login() {
-      this.users.find((user) => {
-        if (
-          (user["email"] == this.email) &
-          (user["password"] == this.password)
-        ) {
-          this.currentUser = user;
-          this.errorLogin = false;
-          localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
-          this.$swal({
-            text: "Login Successful",
-            icon: "success",
-            closeOnClickOutside: false,
-          });
-          this.$router.replace("/");
-          return true;
-        } else {
-          this.$swal({
-            text: "Login Faultful",
-            icon: "error",
-            closeOnClickOutside: false,
-          });
-          this.errorLogin = true;
-          return false;
+      const result = await this.$store.getters.db.collection("users")
+        .where("email", "==", this.email)
+        .where('password', "==", this.password)
+        .get()
+      if (!result.empty) {
+        const docId = result.docs[0].id
+        const userInfo = await this.$store.getters.db.collection("users").doc(docId).get()
+        this.currentUser = {
+          id: docId,
+          ...userInfo.data()
         }
-      });
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+        this.$swal({
+          text: "Login Successful",
+          icon: "success",
+          closeOnClickOutside: false,
+        })
+        await this.$store.dispatch("login", this.currentUser).then(() => {
+          this.$router.replace("/");
+        })
+      }
+      else {
+        console.log('dang nhap sai')
+        this.isLoginFalse = true
+      }
     },
   },
 };

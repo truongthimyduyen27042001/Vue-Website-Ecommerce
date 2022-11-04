@@ -90,7 +90,6 @@ export default {};
 </script>
 <style scoped>
 footer {
-  margin-top: 100px;
   background-color: #232f3e;
   font-size: 16px;
 }

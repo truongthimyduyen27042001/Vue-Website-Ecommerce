@@ -1,5 +1,6 @@
 <template lang="">
-    <div>
+    <div class="dashboard">
+        <h1>This is dashboardsssssssssss</h1>
     </div>
 </template>
 <script>

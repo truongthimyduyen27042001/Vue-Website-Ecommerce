@@ -1,11 +1,11 @@
-<template lang="">
+<template>
   <div class="container">
     <div class="row pt-5">
       <div class="col-md-1"></div>
       <div class="col-md-4 col-12">
         <div class="product-image img-fluid">
           <img
-            :src="product.image"
+            :src="product.images[0]"
             alt="hinh anh"
           />
         </div>
@@ -31,15 +31,8 @@
           </div>
           <div class="features pt-3">
             <h5><strong>Features</strong></h5>
-            <ul>
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-              <li>Officia quas, officiis eius magni error magnam voluptatem</li>
-              <li>
-                nesciunt quod! Earum voluptatibus quaerat dolorem doloribus
-              </li>
-              <li>molestias ipsum ab, ipsa consectetur laboriosam soluta et</li>
-              <li>ut doloremque dolore corrupti, architecto iusto beatae.</li>
-            </ul>
+            
+            <p>{{product.description}}</p>
           </div>
           <div class="btn-control-card d-flex">
             <button id="wishlist-button" class="btn mr-3 p-1 py-0">
@@ -61,27 +54,37 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 export default {
-  created() {
+  async created() {
+    //get product by id 
+    let productId = await this.$route.params.id
+    console.log('@@: ', productId)
+    await this.getProductById(productId);
+    console.log('done')
+
   },
   data() {
     return {
-      product: null,
       baseURL: "https://fakestoreapi.com/",
     };
   },
   methods: {
-    async getProduct() {
-      await axios
-        .get(`${this.baseURL}products/${this.$route.params.id}`)
-        .then((res) => (this.product = res.data))
-        .catch((err) => console.log(err));
-    },
+    ...mapActions(["getProductById"]),
+    // async getProduct() {
+    //   await axios
+    //     .get(`${this.baseURL}products/${this.$route.params.id}`)
+    //     .then((res) => (this.product = res.data))
+    //     .catch((err) => console.log(err));
+    // },
   },
   mounted() {
-    this.getProduct();
+    // this.getProduct();
   },
+  computed: {
+    ...mapGetters(["product"]),
+  }
 };
 </script>
 <style lang="scss">
