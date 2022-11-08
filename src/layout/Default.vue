@@ -1,8 +1,8 @@
 <template>
   <div class="default-inner">
-    <Navbar />
-    <NavbarLeftVue />
-    <div style="margin-top: 74px">
+    <Navbar :isShowNavLeft="isShowNavLeft" @toggleNavLeft="toggleNavLeft"  />
+    <NavbarLeftVue v-show="isShowNavLeft"  @toggleNavLeft="toggleNavLeft"/>
+    <div style="margin-top: 210px">
       <slot></slot>
     </div>
     <Footer />
@@ -20,9 +20,20 @@ export default {
     Footer,
     SlideBar,
     NavbarLeftVue
-},
+  },
+  data() {
+    return {
+      isShowNavLeft: false
+    }
+  }, 
+  methods: {
+    toggleNavLeft(value) {
+      this.isShowNavLeft = value
+    }
+  }
 };
 </script>
 
 <style lang="scss">
+
 </style>

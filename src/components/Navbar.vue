@@ -47,7 +47,11 @@
         </div>
 
         <div class="d-flex justify-content-end">
-          <div id="show-megamenu" class="item-mobile-top close">
+          <div
+            id="show-megamenu"
+            class="item-mobile-top close"
+            @click="toggleNavLeft()"
+          >
             <i class="fa-solid fa-bars"></i>
           </div>
         </div>
@@ -126,7 +130,7 @@
 
     <div class="navbar-center d-none d-md-block pt-30 pb-30 w-100">
       <div class="container">
-        <div class="row d-flex align-items-center">
+        <div class="row d-flex align-items-center m-0">
           <div class="contentsticky_logo col-lg-2 col-md-3 text-left p-0">
             <h1
               class="h2 site-header__logo"
@@ -651,6 +655,7 @@ export default {
       isLogin: false,
       isActiveSocial: false,
       isActiveAccount: false,
+      isShowNavLeft: false,
     };
   },
   methods: {
@@ -662,6 +667,10 @@ export default {
     },
     test() {
       this.isActiveAccount = !this.isActiveAccount;
+    },
+    toggleNavLeft() {
+      this.$emit('toggleNavLeft', true)
+
     },
   },
   computed: {
@@ -930,14 +939,15 @@ export default {
     }
 
     .contentsticky_user {
-
       .header_link_myaccount {
         cursor: pointer;
         margin-right: 40px;
       }
+
       .site-header_myaccount {
         margin-right: 40px;
       }
+
       i {
         font-size: 20px;
       }
@@ -1149,7 +1159,7 @@ export default {
     .site-nav {
       li {
         a {
-          padding: 21px 10px!important;
+          padding: 21px 10px !important;
         }
       }
     }

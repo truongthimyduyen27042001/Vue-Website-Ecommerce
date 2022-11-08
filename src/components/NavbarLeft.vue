@@ -3,7 +3,7 @@
     <div class="canvas-menu drawer-left">
       <div class="canvas-header-box d-flex justify-content-between align-items-center">
         <div class="title-box">Main Menu</div>
-        <div class="close-box"><i class="fa-solid fa-xmark"></i></div>
+        <div class="close-box" @click="closeNavLeft()"><i class="fa-solid fa-xmark"></i></div>
       </div>
       <nav id="canvas-main-menu" class="mm-menu">
         <div class="mm-panels">
@@ -72,14 +72,20 @@
 
 
     </div>
-    <div class="canvas-overlay" style="
-    height: 100%;
+    <div class="canvas-overlay" style="    height: 100%;
     width: 100%;
 "></div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    closeNavLeft() {
+      this.$emit('toggleNavLeft', false)
+
+    }
+  }
+};
 </script>
 <style lang="scss">
 .canvas-menu {
