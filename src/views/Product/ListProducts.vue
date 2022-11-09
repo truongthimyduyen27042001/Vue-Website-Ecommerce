@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="thumbnail-container">
     <div class="row">
       <h1 class="heading-1 p-3">Top Products {{ products.length }}</h1>
     </div>

@@ -131,7 +131,7 @@
     <div class="navbar-center d-none d-md-block pt-30 pb-30 w-100">
       <div class="container">
         <div class="row d-flex align-items-center m-0">
-          <div class="contentsticky_logo col-lg-2 col-md-3 text-left p-0">
+          <div class="contentsticky_logo col-lg-2 col-md-3 text-left">
             <h1
               class="h2 site-header__logo"
               itemscope=""
@@ -1035,6 +1035,8 @@ export default {
     border-top: 1px solid #eaeaea;
 
     #AccessibleNav {
+      padding-left: 15px;
+      padding-right: 15px;
       .site-nav {
         position: relative;
         padding: 0;
@@ -1156,6 +1158,7 @@ export default {
 // responsive
 @media (max-width: 992px) {
   #AccessibleNav {
+
     .site-nav {
       li {
         a {

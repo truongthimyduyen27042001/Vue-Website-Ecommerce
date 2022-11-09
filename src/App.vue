@@ -31,8 +31,7 @@ export default {
 };
 </script>
 <style lnag="scss">
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -60,12 +59,16 @@ ul {
   margin: 0 !important;
 }
 
-
-
-.pt-30 {
-  padding-top: 30px;
+.pt-10 {
+  padding-top: 10px!important;
 }
 
+.pt-30 {
+  padding-top: 30px!important;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
 .pb-30 {
   padding-bottom: 30px;
 }
@@ -109,7 +112,9 @@ pt-30 {
 pb-30 {
   padding-bottom: 30px !important;
 }
-
+.ml-auto {
+  margin-left: auto;
+}
 /* LOADING CSS */
 .loading {
   position: fixed;
@@ -179,6 +184,9 @@ pb-30 {
 }
 
 .container {
-  max-width: 95%;
+  max-width: 90%;
+}
+.pb-60 {
+  padding-bottom: 60px;
 }
 </style>

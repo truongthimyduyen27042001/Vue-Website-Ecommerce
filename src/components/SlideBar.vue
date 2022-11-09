@@ -325,9 +325,4 @@ export default {
     }
   }
 }
-
-// .active {
-//   color: pink !important;
-//   fill: pink !important;
-// }
 </style>
