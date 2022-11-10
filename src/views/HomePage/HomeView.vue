@@ -98,14 +98,9 @@
 <script>
 import ListProducts from "../Product/ListProducts.vue";
 import SlideBarFilterVue from "@/components/SlideBarFilter.vue";
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-// optional style for arrows & dots
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 export default {
-  components: { ListProducts, VueSlickCarousel, SlideBarFilterVue },
+  components: { ListProducts, SlideBarFilterVue },
   name: "HomeView",
-  async created() { },
   data() {
     return {
       currentUser: null,
@@ -121,9 +116,10 @@ export default {
       },
     };
   },
+  
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #background-div {
   background-image: url("../../assets/home.jpg");
 }

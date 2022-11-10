@@ -14,6 +14,9 @@
 import defaultLayout from "./layout/Default.vue";
 import unauthLayout from "./layout/UnAuth.vue";
 import secretLayout from "./layout/Secret.vue";
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "App",
   components: {
@@ -21,12 +24,20 @@ export default {
     unauthLayout,
     secretLayout,
   },
+  async created() {
+    this.fetchUsers();
+    this.fetchProducts();
+  },
   computed: {
     layout() {
       if (this.$route.meta.layout === "unauth") return "unauthLayout";
       else if (this.$route.meta.layout === "secret") return "secretLayout";
       else return "defaultLayout";
     },
+    ...mapGetters(["listUsers", "products"]),
+  },
+  methods: {
+    ...mapActions(["fetchUsers", "fetchProducts"]),
   },
 };
 </script>
@@ -47,34 +58,43 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .row {
   margin: 0;
 }
+
 p,
 h1,
 h2,
 h3,
-ol
-ul {
+ol ul {
   margin: 0 !important;
 }
 
 .pt-10 {
-  padding-top: 10px!important;
+  padding-top: 10px !important;
 }
 
 .pt-30 {
-  padding-top: 30px!important;
+  padding-top: 30px !important;
 }
+
 .mb-30 {
   margin-bottom: 30px;
 }
+
 .pb-30 {
   padding-bottom: 30px;
 }
-
+.mb-25 {
+  margin-bottom: 25px;
+}
 .w-100 {
   width: 100% !important;
+}
+
+.mb-90 {
+  margin-bottom: 90px;
 }
 
 nav {
@@ -112,9 +132,11 @@ pt-30 {
 pb-30 {
   padding-bottom: 30px !important;
 }
+
 .ml-auto {
   margin-left: auto;
 }
+
 /* LOADING CSS */
 .loading {
   position: fixed;
@@ -186,6 +208,7 @@ pb-30 {
 .container {
   max-width: 90%;
 }
+
 .pb-60 {
   padding-bottom: 60px;
 }

@@ -72,13 +72,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
-  async created() {
-    await axios
-      .get("https://634f7b84df22c2af7b52462f.mockapi.io/user")
-      .then((res) => (this.users = res.data));
-  },
   data() {
     return {
       loading: false,

@@ -40,28 +40,27 @@
     </div> -->
     <div class="item-product">
       <div class="thumbnail-container has-multiimage has_variants">
-        <a href="/collections/women/products/diamond-halo-stud-earrings-16" class="w-100">
+        <a :href="'/products/' + product.id" class="w-100">
           <img class="img-fluid product__thumbnail w-100 ls-is-cached lazyloaded"
-            src="//cdn.shopify.com/s/files/1/0106/2721/9522/products/8_68f787cb-5ac0-4024-9ad0-c9c53a957e5b_410x.jpg?v=1598340377"
-            style="
-          ">
+            :src="product.images[0]">
           <img class="img-fluid product__thumbnail-second w-100 ls-is-cached lazyloaded"
             data-src="//cdn.shopify.com/s/files/1/0106/2721/9522/products/16_7ddf94ee-ae5c-44ed-8d85-3cb692e082bf_410x.jpg?v=1598340377"
             alt="Diamond Halo Stud Eget"
-            src="//cdn.shopify.com/s/files/1/0106/2721/9522/products/16_7ddf94ee-ae5c-44ed-8d85-3cb692e082bf_410x.jpg?v=1598340377">
+            :src="product.images[1]">
         </a>
 
         <div class="group-buttons d-flex justify-content-center">
 
           <div class="productWishList">
-            <a class="wishlist btn btnProduct btnProductWishlist" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+            <a class="wishlist btn btnProduct btnProductWishlist" :href="'/products/' + product.id" data-toggle="tooltip" data-placement="top"
+              title="Tooltip on top">
               <i class="fa-regular fa-heart"></i>
             </a>
           </div>
 
 
           <div class="productQuickView d-md-block">
-            <a class="btn btnProduct btnProductQuickview" href="#"
+            <a class="btn btnProduct btnProductQuickview" :href="'/products/' + product.id"
               data-url="/products/diamond-halo-stud-earrings-16?view=quick_view"
               data-handle="diamond-halo-stud-earrings-16" data-pid="32404330971202" data-toggle="tooltip"
               data-placement="top" title="" data-original-title="Quick view">
@@ -74,11 +73,11 @@
       <div class="product-info">
         <div class="block_product_info">
           <div class="product__title">
-            <a href="/collections/women/products/diamond-halo-stud-earrings-16">Diamond Halo Stud Eget</a>
+            <a :href="'/products/' + product.id">{{product.title.substring(0, 30)}}...</a>
           </div>
           <div class="product__price">
             <!-- snippet/product-price.liquid -->
-            <span class="product-price__price"><span class="money" data-currency-usd="$456.00">$456.00</span></span>
+            <span class="product-price__price"><span class="money" data-currency-usd="$456.00">${{product.price}}</span></span>
           </div>
           <div class="product__review">
             <div class="rating"><span class="spr-badge" id="spr_badge_4670447124546" data-rating="5.0"><span
@@ -86,7 +85,7 @@
                     class="spr-icon spr-icon-star" aria-hidden="true"></i><i class="spr-icon spr-icon-star"
                     aria-hidden="true"></i><i class="fa-solid fa-star"></i><i class="spr-icon spr-icon-star"
                     aria-hidden="true"></i><i class="fa-regular fa-star"></i><i
-                    class="fa-regular fa-star"></i></span><span class="spr-badge-caption">(1)</span>
+                    class="fa-regular fa-star"></i></span><span class="spr-badge-caption">({{product.rating.count}})</span>
               </span>
             </div>
           </div>
@@ -170,6 +169,10 @@ a {
     padding: 4px;
 
     a {
+      img {
+        height: 300px!important;
+        object-fit: contain;
+      }
       img:not(.product__thumbnail-second) {
         opacity: 1;
         visibility: initial;
@@ -234,10 +237,11 @@ a {
         }
       }
 
-      .productWishList:hover ,
-      .productQuickView:hover{
+      .productWishList:hover,
+      .productQuickView:hover {
         a {
           background-color: #ff7038;
+
           i {
             color: #fff;
           }

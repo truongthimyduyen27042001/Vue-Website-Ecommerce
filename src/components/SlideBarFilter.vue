@@ -1,7 +1,7 @@
 <template>
     <div class="collection-filters">
         <div class="collection-filters">
-            <facet-filters-form class="facets">
+            <div class="facets">
                 <form id="FacetFiltersForm">
                     <div id="FacetsWrapperDesktop">
                         <div class="headingfilter">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                 </form>
-            </facet-filters-form>
+            </div>
         </div>
     </div>
 </template>

@@ -2,9 +2,7 @@
   <div class="default-inner">
     <Navbar :isShowNavLeft="isShowNavLeft" @toggleNavLeft="toggleNavLeft"  />
     <NavbarLeftVue v-show="isShowNavLeft"  @toggleNavLeft="toggleNavLeft"/>
-    <div style="margin-top: 50px">
-      <slot></slot>
-    </div>
+    <slot></slot>
     <Footer />
 
   </div>
