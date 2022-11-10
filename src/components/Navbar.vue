@@ -150,9 +150,7 @@
                       <div class="nov_sideward_content">
                         <div class="account-list-content">
                           <div class="dropdown-item">
-                            <a class="login" href="https://mediamart-vinovatheme.myshopify.com/account/login"
-                              rel="nofollow" title="Log in"><span>Log in</span>
-                            </a>
+                            <router-link :to="{ name: 'login' }"><span>Render Login</span></router-link>
                           </div>
                           <div class="dropdown-item">
                             <a class="check-out" href="https://mediamart-vinovatheme.myshopify.com/checkout"
@@ -170,7 +168,7 @@
                     <div class="form-account text-center">
                       <div class="form-account-title" data-toggle="modal" data-target="#CustomerAccountForm">
                         <i class="fa-solid fa-lock"></i>
-                        <p class="label-header mb-0">Log in</p>
+                        <router-link :to="{ name: 'login' }"><span>Render Login</span></router-link>
                       </div>
                     </div>
                   </div>
