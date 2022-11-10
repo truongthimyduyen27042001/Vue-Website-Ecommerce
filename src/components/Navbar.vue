@@ -185,9 +185,7 @@
                         <div class="nov_sideward_content">
                           <div class="account-list-content">
                             <div class="dropdown-item">
-                              <a class="login" href="https://mediamart-vinovatheme.myshopify.com/account/login"
-                                rel="nofollow" title="Log in"><span>Log in</span>
-                              </a>
+                              <router-link :to="{ name: 'login' }"><span>Render Login</span></router-link>
                             </div>
 
                             <div class="dropdown-item">
