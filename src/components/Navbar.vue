@@ -185,7 +185,7 @@
                         <div class="nov_sideward_content">
                           <div class="account-list-content">
                             <div class="dropdown-item">
-                              <router-link :to="{ name: 'login' }"><span>Render Login</span></router-link>
+                              <router-link :to="{ name: 'login' }">Login</router-link>
                             </div>
 
                             <div class="dropdown-item">
