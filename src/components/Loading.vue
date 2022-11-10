@@ -21,8 +21,8 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background: white;
-  z-index: 25;
+  background: #ff7038;
+  z-index: 100;
 }
 
 .lds-ring {
@@ -51,21 +51,21 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  border: 8px solid #ff9a61;
-  border-color: #ff9a61 transparent transparent transparent;
+  border: 8px solid black;
+  border-color: black transparent transparent transparent;
   animation: lds-ring 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-radius: 50%;
 }
 
 .lds-ring div:nth-child(1) {
   animation-delay: -0.2s;
-  border-color: #ff9a61 transparent transparent transparent;
+  border-color: black transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(2) {
   animation-delay: -1s;
   animation: none;
-  border-color: rgba(101, 101, 101, 0.3);
+  border-color: rgba(216, 216, 216, 0.3);
 }
 
 @keyframes lds-ring {

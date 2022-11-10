@@ -26,7 +26,7 @@ export default new Vuex.Store({
     storageRef: firebase.storage().ref(),
     store: getFirestore(firebase.initializeApp(config)),
     currentUser: firebase.auth().currentUser,
-    isLoading: true,
+    loading: true,
   },
   getters: {
     listUsers: (state) => state.users,
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     product: (state) => state.product,
     db: state => state.db,
     storageRef: state => state.storageRef,
-    isLoading: state => state.isLoading,
+    isLoading: state => state.loading,
     store: state => state.store
   },
   mutations: {
@@ -49,7 +49,7 @@ export default new Vuex.Store({
       state.products = products
     },
     SET_LOADING(state, payload) {
-      state.loading = payload
+      state.loading = false
     },
     SET_PRODUCT(state, payload) {
       state.product = payload
@@ -58,7 +58,6 @@ export default new Vuex.Store({
   actions: {
     async login(context, userInfo) {
       context.commit('SET_CURRENTUSER', userInfo)
-      console.log('okkkk')
     },
     async logout(context) {
       await firebase.auth().signOut();
@@ -90,9 +89,8 @@ export default new Vuex.Store({
     async register(context, userInfo) {
       this.getters.db.collection('users').add(userInfo)
     },
-    async setLoading(context) {
-      context.commit('SET_LOADING', false)
-      console.log("sdsdsd")
+    async setLoading(context, status) {
+      context.commit('SET_LOADING', status)
     },
     async getProductById(context, productId) {
       let productInfo = await this.getters.db.collection("products").doc(productId).get()

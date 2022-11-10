@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <Loading :is-loading="isLoading" />
     {{/* logo */}}
     <div class="row">
       <div class="col-12 text-center pt-3">

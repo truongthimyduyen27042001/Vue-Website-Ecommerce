@@ -25,8 +25,10 @@ export default {
     secretLayout,
   },
   async created() {
-    this.fetchUsers();
-    this.fetchProducts();
+    await this.fetchUsers();
+    await this.fetchProducts().then(() => {
+      this.$store.dispatch("setLoading", false)
+    })
   },
   computed: {
     layout() {
@@ -37,7 +39,7 @@ export default {
     ...mapGetters(["listUsers", "products"]),
   },
   methods: {
-    ...mapActions(["fetchUsers", "fetchProducts"]),
+    ...mapActions(["fetchUsers", "fetchProducts", "setLoading"]),
   },
 };
 </script>
@@ -86,9 +88,11 @@ ol ul {
 .pb-30 {
   padding-bottom: 30px;
 }
+
 .mb-25 {
   margin-bottom: 25px;
 }
+
 .w-100 {
   width: 100% !important;
 }

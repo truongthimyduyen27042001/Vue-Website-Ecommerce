@@ -1,25 +1,23 @@
 <template>
   <div class="main-content">
+    <!-- loading -->
+    <Loading v-show="isLoading" />
     <section class="page-container drawer-page-content" id="PageContainer">
-      <div class="page-width">
-        <div class="product-detail-template">
+      <div class="page-width" >
+        <div class="product-detail-template" v-if="product">
           <div class="block-info mb-90">
-            <div class="container">
+            <div class="container" >
               <div class="product-single row" data-product_layout_thumb="zoom" data-zoom_scroll="true"
                 data-zoom_contain_lens="true" data-zoomtype="inner" data-lenssize="200" data-lensshape="square"
                 data-lensborder="1" data-bordersize="2" data-bordercolour="#f9b61e" data-popup="true">
-
                 <div class="thumb_left block_images col-md-7 col col-xs-12">
                   <div class="product-single__photos d-lg-flex">
                     <div class="proFeaturedImage w-100">
                       <div class="block_content w-100">
-
                         <img id="ProductPhotoImg" class="img-fluid img-responsive lazyloaded w-100"
                           alt="Kiamond Halo Stud Cum" :src="product.images[0]">
                       </div>
                     </div>
-
-
                     <div id="productThumbs">
                       <div class="thumblist" data-pswp-uid="1">
                         <div class="nov-thumb_vertical slick-initialized slick-slider slick-vertical">
@@ -50,7 +48,7 @@
                               <div class="thumbItem slick-slide slick-cloned" tabindex="-1" style="width: 118px;"
                                 data-slick-index="-1" aria-hidden="true">
                                 <a href="javascript:void(0)" class="product-single__thumbnail" tabindex="-1">
-                                  <img :src="product.images[3]" alt="Kiamond Halo Stud Cum">
+                                  <img :src="product.images[0]" alt="Kiamond Halo Stud Cum">
                                 </a>
                               </div>
                               <div class="thumbItem active slick-slide slick-current slick-active" tabindex="0"
@@ -190,17 +188,16 @@
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
                 <div class="block_information position-static col-39-16 col-md-5 col col-xs-12 mt-xs-30">
                   <div class="info_content">
-                    <h1 itemprop="name" class="product-single__title">{{ product.title }}</h1>
+                    <h1 itemprop="name" class="product-single__title">sdsdsdsdsd</h1>
                     <div class="product-single__meta">
                       <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                         <meta itemprop="priceCurrency" content="USD">
                         <link itemprop="availability" href="http://schema.org/InStock">
-
-
                         <div class="group-reviews has-border d-flex align-items-center mb-25">
                           <div class="detail-reviews">
                             <span class="spr-badge" id="spr_badge_4670532026434" data-rating="0.0"><span
@@ -212,9 +209,6 @@
 
                           </div>
                         </div>
-
-
-
                         <div class="available_product group-single__sku d-flex">
                           <div class="available_name control-label">
                             Available:
@@ -231,7 +225,7 @@
 
                           <p itemprop="sku" class="product-single__sku">
                             <span class="label control-label">SKU:</span>
-                            <span class="label-sku">{{ product.id }}</span>
+                            <span class="label-sku">This is id</span>
                           </p>
                           <p itemprop="cat" class="product-single__cat"><span
                               class="label control-label">Category:</span>
@@ -328,11 +322,12 @@
                 <span>Related product</span>
               </div>
               <div class="grid">
-                <VueSlickCarousel id="shopify-section-slider" :arrows="true" :dots="true" v-bind="slickOptions">
-                  <div v-for="product of products" :key="product.id" @click="$router.push('/products/' + product.id)">
-                    <ProductBox :product="product" />
+                <div class="row">
+                  <div v-for="index in 4" :key="index" class="col-xl-3 col-md-6 col-12 d-flex p-3"
+                    @click="$router.push('/products/' + products[index].id)">
+                    <ProductBox :product="products[index]" />
                   </div>
-                </VueSlickCarousel>
+                </div>
               </div>
             </div>
           </div>
@@ -344,27 +339,29 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ProductBox from "@/components/Product/ProductBox.vue";
+import Loading from "@/components/Loading.vue";
+
 export default {
   name: "Detailproduct",
-  components: { ProductBox },
+  components: { ProductBox, Loading },
   async created() {
+    //set loading before fetch APi product 
+    console.log('duyennn')
     let productId = await this.$route.params.id
-    console.log('@@: ', productId)
-    await this.getProductById(productId);
-    console.log('done')
+    await this.getProductById(productId).then(() => {
+      this.isLoading = false
+    })
   },
   data() {
     return {
-      baseURL: "https://fakestoreapi.com/",
+      isLoading: true,
       slickOptions: {
         dots: true,
-        focusOnSelect: true,
         infinite: true,
         auto: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 3,
-        touchThreshold: 5,
+        slidesToScroll: 1,
       },
     };
   },
@@ -372,7 +369,7 @@ export default {
     ...mapActions(["getProductById"]),
   },
   computed: {
-    ...mapGetters(["product", "products"]),
+    ...mapGetters(["products", "product"]),
   }
 };
 </script>
@@ -388,6 +385,11 @@ export default {
                 .proFeaturedImage {
                   .block_content {
                     box-shadow: 11px 11px 5px #0000000d;
+
+                    img {
+                      height: 670px;
+                      object-fit: contain;
+                    }
                   }
                 }
 

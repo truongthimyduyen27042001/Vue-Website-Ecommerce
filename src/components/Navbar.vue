@@ -134,22 +134,16 @@
             </div>
             <div class="col-lg-3 col-md-4 d-flex justify-content-end align-items-end p-0">
               <div class="contentsticky_user d-flex justify-content-end align-items-end">
-                <div class="header_link_myaccount text-center">
-                  <div class="form-account text-center">
-                    <div class="form-account-title" data-toggle="modal" data-target="#CustomerAccountForm">
-                      <i class="fa-solid fa-lock"></i>
-                      <p class="label-header mb-0">Log in</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="site-header_myaccount dropdown">
-                  <!-- s -->
+                
+                <!-- user loggined control -->
+                <div class="site-header_myaccount dropdown" v-if="currentUser">
                   <div class="dropdown" @click="isActiveAccount = !isActiveAccount">
                     <div class="myaccount-title dropdown-toggle text-center" type="button" data-bs-toggle="dropdown"
                       aria-expanded="false">
-                      <i class="fa-regular fa-user"></i>
-                      <p class="label-header mb-0">Account</p>
+                      <img
+                      src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t39.30808-6/310962542_3334863160127922_2525341124977864171_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=_bZUjqRGlecAX97QQ6T&_nc_ht=scontent.fsgn2-1.fna&oh=00_AfAuOdKDn7E6d8GKyTGW9sV3mDR2_GXSRaYacZJ32s-CFQ&oe=6371DD78"
+                        alt="" style="width: 40px; height: 40px; object-fit: cover; border-radius: 100%">
+                      <p class="label-header mb-0">{{ currentUser.username }}</p>
                     </div>
                     <div class="account-list dropdown-menu-right" :class="{ show: isActiveAccount }"
                       id="_desktop_account_list" x-placement="bottom-end">
@@ -160,29 +154,69 @@
                               rel="nofollow" title="Log in"><span>Log in</span>
                             </a>
                           </div>
-
-                          <div class="dropdown-item">
-                            <a class="register" href="https://mediamart-vinovatheme.myshopify.com/account/register"
-                              rel="nofollow" title="Sign in / Register account"><span>Sign in / Register account</span>
-                            </a>
-                          </div>
                           <div class="dropdown-item">
                             <a class="check-out" href="https://mediamart-vinovatheme.myshopify.com/checkout"
                               rel="nofollow" title="Check out"><span>Check out</span>
-                            </a>
-                          </div>
-                          <div class="link_wishlist">
-                            <a class="wishlist" href="/pages/page-wishlist" rel="nofollow" title="My Wishlist">
-                              <i class="zmdi zmdi-favorite"></i>
-                              <span>My Wishlist</span>
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- e -->
                 </div>
+                <!-- user no loggin  -->
+                <div class="no-user contentsticky_user_control d-flex" v-else>
+                  <div class="header_link_myaccount text-center">
+                    <div class="form-account text-center">
+                      <div class="form-account-title" data-toggle="modal" data-target="#CustomerAccountForm">
+                        <i class="fa-solid fa-lock"></i>
+                        <p class="label-header mb-0">Log in</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="site-header_myaccount dropdown">
+                    <div class="dropdown" @click="isActiveAccount = !isActiveAccount">
+                      <div class="myaccount-title dropdown-toggle text-center" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-regular fa-user"></i>
+                        <p class="label-header mb-0">Account</p>
+                      </div>
+                      <div class="account-list dropdown-menu-right" :class="{ show: isActiveAccount }"
+                        id="_desktop_account_list" x-placement="bottom-end">
+                        <div class="nov_sideward_content">
+                          <div class="account-list-content">
+                            <div class="dropdown-item">
+                              <a class="login" href="https://mediamart-vinovatheme.myshopify.com/account/login"
+                                rel="nofollow" title="Log in"><span>Log in</span>
+                              </a>
+                            </div>
+
+                            <div class="dropdown-item">
+                              <a class="register" href="https://mediamart-vinovatheme.myshopify.com/account/register"
+                                rel="nofollow" title="Sign in / Register account"><span>Sign in / Register
+                                  account</span>
+                              </a>
+                            </div>
+                            <div class="dropdown-item">
+                              <a class="check-out" href="https://mediamart-vinovatheme.myshopify.com/checkout"
+                                rel="nofollow" title="Check out"><span>Check out</span>
+                              </a>
+                            </div>
+                            <div class="link_wishlist">
+                              <a class="wishlist" href="/pages/page-wishlist" rel="nofollow" title="My Wishlist">
+                                <i class="zmdi zmdi-favorite"></i>
+                                <span>My Wishlist</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
                 <div class="contentsticky_cart">
                   <div id="cart_block" class="d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center header-cart">
@@ -485,7 +519,7 @@
         </div>
       </div>
     </div>
-    <div id="header-sticky" class="d-none d-md-block" :class="{'sticky-menu-active': isHeaderSticky}"
+    <div id="header-sticky" class="d-none d-md-block" :class="{ 'sticky-menu-active': isHeaderSticky }"
       style="background-color: #ff7038;">
       <div class="container">
         <div class="row align-items-center justify-content-between">
@@ -575,9 +609,6 @@ export default {
       this.currentUser = null;
       await this.$store.dispatch("login", null);
       location.reload();
-    },
-    test() {
-      this.isActiveAccount = !this.isActiveAccount;
     },
     toggleNavLeft() {
       this.$emit('toggleNavLeft', true)
@@ -878,6 +909,7 @@ export default {
         opacity: 0;
         visibility: hidden;
         box-shadow: 0 0 10px #0000001a;
+        background-color: #fff;
         display: block;
         border: none;
         overflow: hidden;

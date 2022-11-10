@@ -1,5 +1,7 @@
 <template>
   <div class="home-page">
+    <!-- loading -->
+    <Loading v-show="isLoading" />
     <div id="home-page-notify">
       <div class="container">
         <ol class="breadcrumb list-inline" itemscope="" itemtype="http://schema.org/BreadcrumbList">
@@ -70,7 +72,7 @@
               <div class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="sort-by__label">Date, old to new</span>
               </div>
-              <div  class="dropdown-menu dropdown-menu-right text-right">
+              <div class="dropdown-menu dropdown-menu-right text-right">
                 <div value="manual" data-sortby-item="">Featured</div>
                 <div value="best-selling" data-sortby-item="">Best selling</div>
                 <div value="title-ascending" data-sortby-item="">Alphabetically, A-Z</div>
@@ -98,8 +100,12 @@
 <script>
 import ListProducts from "../Product/ListProducts.vue";
 import SlideBarFilterVue from "@/components/SlideBarFilter.vue";
+import Loading from "@/components/Loading.vue";
+
+import { mapGetters } from "vuex";
+
 export default {
-  components: { ListProducts, SlideBarFilterVue },
+  components: { ListProducts, SlideBarFilterVue, Loading },
   name: "HomeView",
   data() {
     return {
@@ -116,10 +122,13 @@ export default {
       },
     };
   },
-  
+  computed: {
+    ...mapGetters(["isLoading"]),
+  }
+
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 #background-div {
   background-image: url("../../assets/home.jpg");
 }
@@ -246,6 +255,7 @@ a:hover {
 }
 
 // shopify - slick - slider
+
 .slick-slider {
   margin-bottom: 80px;
 
@@ -266,6 +276,10 @@ a:hover {
     color: #fff;
     text-align: center;
     line-height: 100px;
+  }
+
+  .slick-arrow:hover {
+    background: rgba(0, 0, 0, .3);
   }
 
   .slick-arrow.slick-prev {
